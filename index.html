@@ -62,11 +62,20 @@
     const WARRIOR_COMMON = ["Ironsong Response (red)", "Ironsong Response (yellow)", "Ironsong Response (blue)", "Biting Blade (red)", "Biting Blade (yellow)", "Biting Blade (blue)", "Stroke of Foresight (red)", "Stroke of Foresight (yellow)", "Stroke of Foresight (blue)", "Sharpen Steel (red)", "Sharpen Steel (yellow)", "Sharpen Steel (blue)", "Driving Blade (red)", "Driving Blade (yellow)", "Driving Blade (blue)", "Nature's Path Pilgrimage (red)", "Nature's Path Pilgrimage (yellow)", "Nature's Path Pilgrimage (blue)"]
 
     const CLASS_COMMON = [...BRUTE_COMMON, ...GUARDIAN_COMMON, ...NINJA_COMMON, ...WARRIOR_COMMON]
-    const classPools = [
+    
+    const CLASS_POOLS = [
         BRUTE_COMMON,
         GUARDIAN_COMMON,
         NINJA_COMMON,
         WARRIOR_COMMON,
+    ];
+    
+    const POOL_NAMES = [
+        "Brute",
+        "Guardian",
+        "Ninja",
+        "Warrior",
+        "Generic",
     ];
     
     const GENERIC_COMMON = ["Barraging Brawnhide (red)", "Barraging Brawnhide (yellow)", "Barraging Brawnhide (blue)", "Demolition Crew (red)", "Demolition Crew (yellow)", "Demolition Crew (blue)", "Flock of the Feather Walkers (red)", "Flock of the Feather Walkers (yellow)", "Flock of the Feather Walkers (blue)", "Nimble Strike (red)", "Nimble Strike (yellow)", "Nimble Strike (blue)", "Raging Onslaught (red)", "Raging Onslaught (yellow)", "Raging Onslaught (blue)", "Scar for a Scar (red)", "Scar for a Scar (yellow)", "Scar for a Scar (blue)", "Scour the Battlescape (red)", "Scour the Battlescape (yellow)", "Scour the Battlescape (blue)", "Regurgitating Slog (red)", "Regurgitating Slog (yellow)", "Regurgitating Slog (blue)", "Wounded Bull (red)", "Wounded Bull (yellow)", "Wounded Bull (blue)", "Wounding Blow (red)", "Wounding Blow (yellow)", "Wounding Blow (blue)", "Pummel (red)", "Pummel (yellow)", "Pummel (blue)", "Razor Reflex (red)", "Razor Reflex (yellow)", "Razor Reflex (blue)", "Unmovable (red)", "Unmovable (yellow)", "Unmovable (blue)", "Sink Below (red)", "Sink Below (yellow)", "Sink Below (blue)", "Nimblism (red)", "Nimblism (yellow)", "Nimblism (blue)", "Sloggism (red)", "Sloggism (yellow)", "Sloggism (blue)"]
@@ -82,9 +91,9 @@
 
       for (let i = 0; i < 6; i++) {
         // Pick one index to get 1 card
-        const oneOfIndex = Math.floor(Math.random() * classPools.length);
+        const oneOfIndex = Math.floor(Math.random() * CLASS_POOLS.length);
 
-        classPools.forEach((pool, j) => {
+        CLASS_POOLS.forEach((pool, j) => {
           deck.push(...sample(pool, j === oneOfIndex ? 1 : 2));
         });
         
@@ -123,6 +132,23 @@
           deck.push(...sample([...GENERIC_COMMON, ...CLASS_COMMON, ...COMMON_EQUIPMENT], 1));
         }
       }
+      
+      var classCount = {};
+      deck.forEach((card, index) => {
+        //Check which class the card belongs to
+        if (BRUTE_COMMON.includes(card) || BRUTE_RARE.includes(card)) {
+          classCount["Brute"] = (classCount["Brute"] || 0) + 1;
+        } else if (GUARDIAN_COMMON.includes(card) || GUARDIAN_RARE.includes(card)) {
+          classCount["Guardian"] = (classCount["Guardian"] || 0) + 1;
+        } else if (NINJA_COMMON.includes(card) || NINJA_RARE.includes(card)) {
+          classCount["Ninja"] = (classCount["Ninja"] || 0) + 1;
+        } else if (WARRIOR_COMMON.includes(card) || WARRIOR_RARE.includes(card)) {
+          classCount["Warrior"] = (classCount["Warrior"] || 0) + 1;
+        } else {
+          classCount["Generic/Maj/Equip/Super/Legendary"] = (classCount["Generic/Maj/Equip/Super/Legendary"] || 0) + 1;
+        }
+      });
+      console.log("Class counts:", classCount);
 
       const countCards = list =>
         list.reduce((acc, card) => {
