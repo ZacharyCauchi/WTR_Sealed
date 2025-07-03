@@ -60,8 +60,15 @@
     const GUARDIAN_COMMON = ["Buckling Blow (red)", "Buckling Blow (yellow)", "Buckling Blow (blue)", "Cartilage Crush (red)", "Cartilage Crush (yellow)", "Cartilage Crush (blue)", "Crush Confidence (red)", "Crush Confidence (yellow)", "Crush Confidence (blue)", "Debilitate (red)", "Debilitate (yellow)", "Debilitate (blue)", "Emerging Power (red)", "Emerging Power (yellow)", "Emerging Power (blue)", "Stonewall Confidence (red)", "Stonewall Confidence (yellow)", "Stonewall Confidence (blue)"]
     const NINJA_COMMON = ["Open the Center (red)", "Open the Center (yellow)", "Open the Center (blue)","Head Jab (red)", "Head Jab (yellow)", "Head Jab (blue)", "Rising Knee Thrust (red)", "Rising Knee Thrust (yellow)", "Rising Knee Thrust (blue)", "Surging Strike (red)", "Surging Strike (yellow)", "Surging Strike (blue)", "Whelming Gustwave (red)", "Whelming Gustwave (yellow)", "Whelming Gustwave (blue)"]
     const WARRIOR_COMMON = ["Ironsong Response (red)", "Ironsong Response (yellow)", "Ironsong Response (blue)", "Biting Blade (red)", "Biting Blade (yellow)", "Biting Blade (blue)", "Stroke of Foresight (red)", "Stroke of Foresight (yellow)", "Stroke of Foresight (blue)", "Sharpen Steel (red)", "Sharpen Steel (yellow)", "Sharpen Steel (blue)", "Driving Blade (red)", "Driving Blade (yellow)", "Driving Blade (blue)", "Nature's Path Pilgrimage (red)", "Nature's Path Pilgrimage (yellow)", "Nature's Path Pilgrimage (blue)"]
-    
+
     const CLASS_COMMON = [...BRUTE_COMMON, ...GUARDIAN_COMMON, ...NINJA_COMMON, ...WARRIOR_COMMON]
+    const classPools = [
+        BRUTE_COMMON,
+        GUARDIAN_COMMON,
+        NINJA_COMMON,
+        WARRIOR_COMMON,
+    ];
+    
     const GENERIC_COMMON = ["Barraging Brawnhide (red)", "Barraging Brawnhide (yellow)", "Barraging Brawnhide (blue)", "Demolition Crew (red)", "Demolition Crew (yellow)", "Demolition Crew (blue)", "Flock of the Feather Walkers (red)", "Flock of the Feather Walkers (yellow)", "Flock of the Feather Walkers (blue)", "Nimble Strike (red)", "Nimble Strike (yellow)", "Nimble Strike (blue)", "Raging Onslaught (red)", "Raging Onslaught (yellow)", "Raging Onslaught (blue)", "Scar for a Scar (red)", "Scar for a Scar (yellow)", "Scar for a Scar (blue)", "Scour the Battlescape (red)", "Scour the Battlescape (yellow)", "Scour the Battlescape (blue)", "Regurgitating Slog (red)", "Regurgitating Slog (yellow)", "Regurgitating Slog (blue)", "Wounded Bull (red)", "Wounded Bull (yellow)", "Wounded Bull (blue)", "Wounding Blow (red)", "Wounding Blow (yellow)", "Wounding Blow (blue)", "Pummel (red)", "Pummel (yellow)", "Pummel (blue)", "Razor Reflex (red)", "Razor Reflex (yellow)", "Razor Reflex (blue)", "Unmovable (red)", "Unmovable (yellow)", "Unmovable (blue)", "Sink Below (red)", "Sink Below (yellow)", "Sink Below (blue)", "Nimblism (red)", "Nimblism (yellow)", "Nimblism (blue)", "Sloggism (red)", "Sloggism (yellow)", "Sloggism (blue)"]
     
     const CLASS_EQUIPMENT = ["Barkbone Strapping", "Helm of Isen's Peak", "Breaking Scales", "Refraction Bolters"];
@@ -74,7 +81,13 @@
       let equipment = [];
 
       for (let i = 0; i < 6; i++) {
-        deck.push(...sample(CLASS_COMMON, 7));
+        // Pick one index to get 1 card
+        const oneOfIndex = Math.floor(Math.random() * classPools.length);
+
+        classPools.forEach((pool, j) => {
+          deck.push(...sample(pool, j === oneOfIndex ? 1 : 2));
+        });
+        
         deck.push(...sample(GENERIC_COMMON, 4));
         equipment.push(...sample(COMMON_EQUIPMENT, 1));
 
