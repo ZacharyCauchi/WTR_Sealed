@@ -28,6 +28,7 @@
   <h1>WTR UNL Sealed Generator</h1>
   <button onclick="generateDeck(true)">Generate Sealed Pool with Drone</button>
   <button onclick="generateDeck(false)">Generate Sealed Pool with out Drone</button>
+  <button onclick="copyToClipboard()">Copy to Clipboard</button>
   <pre id="output"></pre>
 
   <script>
@@ -132,6 +133,15 @@
       }
 
       document.getElementById("output").textContent = output.join("\n");
+    }
+
+    function copyToClipboard() {
+      const output = document.getElementById("output").textContent;
+      navigator.clipboard.writeText(output).then(() => {
+        alert("Deck copied to clipboard!");
+      }).catch(err => {
+        alert("Failed to copy: " + err);
+      });
     }
   </script>
 </body>
