@@ -43,7 +43,7 @@
       return result;
     }
 
-    /--- WTR CARD LIST ---
+    //--- WTR CARD LIST ---
     const WTR_LEGENDARY = ["Scabskin Leathers", "Tectonic Plating", "Mask of Momentum", "Braveforge Bracers", "Fyendal's Spring Tunic"];
     const WTR_MAJESTIC = ["Alpha Rampage (red)", "Bloodrush Bellow (yellow)", "Crippling Crush (red)", "Spinal Crush (red)", "Lord of Wind (blue)", "Ancestral Empowerment (red)", "Glint the Quicksilver (blue)", "Steelblade Supremacy (red)", "Enlightened Strike (red)", "Tome of Fyendal (yellow)"];
     const WTR_SUPER = ["Reckless Swing (blue)", "Sand Sketched Plan (blue)", "Bone Head Barrier (yellow)", "Cranial Crush (blue)", "Forged for War (yellow)", "Show Time! (blue)", "Mugenshi: RELEASE (blue)", "Hurricane Technique (yellow)", "Pounding Gale (red)", "Rout (red)", "Singing Steelblade (yellow)", "Ironsong Determination (yellow)", "Last Ditch Effort (blue)", "Crazy Brew (blue)", "Rememberance (yellow)"];
@@ -85,7 +85,7 @@
     const WTR_GENERIC_EQUIPMENT = ["Hope Merchant's Hood", "Heartened Cross Strap", "Goliath Gauntlet", "Snapdragon Scalers", "Ironrot Helm", "Ironrot Plate", "Ironrot Gauntlet", "Ironrot Legs"];
     const WTR_COMMON_EQUIPMENT = [...WTR_CLASS_EQUIPMENT, ...WTR_GENERIC_EQUIPMENT];
 
-    /--- ARC CARD LIST ---
+    // --- ARC CARD LIST ---
     const ARC_LEGENDARY = ["Teklo Foundry Heart", "Skullbone Crosswrap", "Grasp of the Arknight", "Storm Striders", "Arcanite Skullcap"];
     const ARC_MAJESTIC = ["High Octane (red)", "Teklo Core (blue)", "Red in the Ledger (red)", "Three of a Kind (red)", "Arknight Ascendancy (red)", "Mordred Tide (red)", "Blazing Aether (red)", "Sonic Boom (yellow)", "Command and Conquer (red)", "Art of War (yellow)"];
     const ARC_SUPER = ["Maximum Velocity (red)", "Spark of Genius (yellow)", "Induction Chamber (red)", "Endless Arrow (red)", "Nock the Deathwhistle (blue)", "Rapid Fire (yellow)", "Ninth Blade of the Blood Oath (yellow)", "Become the Arknight (blue)", "Tome of the Arknight (blue)", "Forked Lightning (red)", "Lesson in Lava (yellow)", "Tome of Aetherwind (red)", "Pursuit of Knowledge (blue)", "Chains of Eminence (red)", "Rusted Relic (blue)"];
@@ -125,7 +125,7 @@
     const ARC_GENERIC_EQUIPMENT = ["Talismanic Lens", "Vest of the First Fist", "Bracers of Belief", "Mage Master Boots", "Nullrune Hood", "Nullrune Robe", "Nullrune Gloves", "Nullrune Boots"];
     const ARC_COMMON_EQUIPMENT = [...ARC_CLASS_EQUIPMENT, ...ARC_GENERIC_EQUIPMENT];
       
-    /--------------
+    // --------------
       
     function generateDeckWTR(drone) {
       let deck = [];
@@ -182,7 +182,7 @@
       
       var classCount = {};
       deck.forEach((card, index) => {
-        //Check which class the card belongs to
+        // Check which class the card belongs to
         if (BRUTE_COMMON.includes(card) || BRUTE_RARE.includes(card)) {
           classCount["Brute"] = (classCount["Brute"] || 0) + 1;
         } else if (GUARDIAN_COMMON.includes(card) || GUARDIAN_RARE.includes(card)) {
@@ -255,9 +255,9 @@
           }
         
         const foilRoll = Math.random();
-        / Slightly different calculation here than for UNL WTR, because 1st packs can have a cold foil in the foil slot
+        // Slightly different calculation here than for UNL WTR, because 1st packs can have a cold foil in the foil slot
         if (foilRoll < 1 / 24) {
-          / Cold Foil Opened
+          // Cold Foil Opened
           const coldRoll = Math.random();
           if (coldRoll < 1 / 4) {
           equipment.push(...sample(ARC_LEGENDARY, 1));
@@ -265,7 +265,7 @@
             equipment.push(...sample([...ARC_COMMON_EQUIPMENT, ...ARC_CLASS_EQUIPMENT], 1));
           }
         } else {
-          / Rainbow Foil Opened
+          // Rainbow Foil Opened
           const rainbowRoll = Math.random();
           if (rainbowRoll < 1 / 168) {
             deck.push(...sample(ARC_MAJESTIC, 1));
@@ -280,7 +280,7 @@
       
       var classCount = {};
       deck.forEach((card, index) => {
-        //Check which class the card belongs to
+        // Check which class the card belongs to
         if (MECHANOLOGIST_COMMON.includes(card) || MECHANOLOGIST_RARE.includes(card)) {
           classCount["Mechanologist"] = (classCount["Mechanologist"] || 0) + 1;
         } else if (RANGER_COMMON.includes(card) || RANGER_RARE.includes(card)) {
