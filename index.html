@@ -204,7 +204,7 @@
         }, {});
 
      const output = [];
-      const fabraryOutput = '';
+      const fabraryOutput = [];
       const now = new Date();
       const formattedDate = now.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
       const timestamp = now.toISOString().slice(0, 19).replace(/[:T]/g, "_");
@@ -213,17 +213,17 @@
       output.push(`Date\t${formattedDate}`);
       output.push("Event\tWTR Sealed Training");
       output.push("Format\tSealed Deck");
-      fabraryOutput += "&format=sealed";
+      fabraryOutput.push("&format=sealed");
       output.push("Hero / Class\tBravo (Guardian)");
-      fabraryOutput += "&cards=WTR039";
+      fabraryOutput.push("WTR039");
       output.push("Result\t1st\n");
       output.push("\nArena cards\n2x Harmonized Kodachi\n1x Dawnblade\n1x Romping Club\n1x Anothos\n");
-      fabraryOutput += "&cards=WTR078" += "&cards=WTR078" += "&cards=WTR115" += "&cards=WTR003" += "&cards=WTR040";
+      fabraryOutput.push("WTR078","WTR078","WTR115","WTR003","WTR040");
 
       output.push("Equipment:");
       for (const [card, qty] of Object.entries(countCards(equipment))) {
         output.push(`${qty}x ${card}`);
-        fabraryOutput +=  ("&cards=" + card.replaceAll(' ','-')).repeat(qty);
+        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-')));
       }
       console.log(fabraryOutput);
       output.push("\nDeck cards:");
