@@ -223,15 +223,16 @@
       output.push("Equipment:");
       for (const [card, qty] of Object.entries(countCards(equipment))) {
         output.push(`${qty}x ${card}`);
-        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-')));
+        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-').replaceAll(`'`, '')));
       }
-      console.log(fabraryOutput);
       output.push("\nDeck cards:");
       for (const [card, qty] of Object.entries(countCards(deck))) {
         output.push(`${qty}x ${card}`);
+        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-').replaceAll(`'`, '').replaceAll(`(`, '-').replaceAll(`)`, '')));
       }
 
       document.getElementById("output").textContent = output.join("\n");
+      console.log(fabraryOutput.join("&cards="));
     }
 
     //-----------------------------------------
