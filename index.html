@@ -223,7 +223,7 @@
       output.push("Equipment:");
       for (const [card, qty] of Object.entries(countCards(equipment))) {
         output.push(`${qty}x ${card}`);
-        fabraryOutput.concat( ("&cards=" + card.replaceAll(' ','-').repeat(qty) );
+        fabraryOutput.concat( ("&cards=" + card.replaceAll(' ','-')).repeat(qty) );
       }
       console.log(fabraryOutput);
       output.push("\nDeck cards:");
