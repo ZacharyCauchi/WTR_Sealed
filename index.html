@@ -126,6 +126,9 @@
     const ARC_COMMON_EQUIPMENT = [...ARC_CLASS_EQUIPMENT, ...ARC_GENERIC_EQUIPMENT];
       
     // --------------
+    function cleanCardName(card) {
+      return card.replaceAll(' ', '-').replaceAll(`'`, '').replaceAll(`(`, '').replaceAll(`)`, '').toLowerCase();
+    }
       
     function generateDeckWTR(drone) {
       let deck = [];
@@ -223,16 +226,16 @@
       output.push("Equipment:");
       for (const [card, qty] of Object.entries(countCards(equipment))) {
         output.push(`${qty}x ${card}`);
-        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-').replaceAll(`'`, '')));
+        fabraryOutput.push(...Array(qty).fill(cleanCardName(card)));
       }
       output.push("\nDeck cards:");
       for (const [card, qty] of Object.entries(countCards(deck))) {
         output.push(`${qty}x ${card}`);
-        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-').replaceAll(`'`, '').replaceAll(`(`, '').replaceAll(`)`, '')));
+        fabraryOutput.push(...Array(qty).fill(cleanCardName(card)));
       }
 
       document.getElementById("output").textContent = output.join("\n");
-      console.log(fabraryOutput.join("&cards=").toLowerCase());
+      console.log(fabraryOutput.join("&cards="));
     }
 
     //-----------------------------------------
