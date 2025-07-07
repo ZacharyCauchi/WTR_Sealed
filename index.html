@@ -228,7 +228,7 @@
       output.push("\nDeck cards:");
       for (const [card, qty] of Object.entries(countCards(deck))) {
         output.push(`${qty}x ${card}`);
-        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-').replaceAll(`'`, '').replaceAll(`(`, '-').replaceAll(`)`, '')));
+        fabraryOutput.push(...Array(qty).fill(card.replaceAll(' ', '-').replaceAll(`'`, '').replaceAll(`(`, '').replaceAll(`)`, '')));
       }
 
       document.getElementById("output").textContent = output.join("\n");
