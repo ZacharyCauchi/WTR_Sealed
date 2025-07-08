@@ -236,7 +236,6 @@
       }
 
       document.getElementById("output").textContent = output.join("\n");
-      console.log(fabraryOutput.join("&cards="));
       document.getElementById("fabraryLink").href = "https://fabrary.net/decks?tab=import".concat(fabraryOutput.join("&cards="));
     }
 
@@ -314,6 +313,7 @@
         }, {});
 
      const output = [];
+      const fabraryOutput = [];
       const now = new Date();
       const formattedDate = now.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
       const timestamp = now.toISOString().slice(0, 19).replace(/[:T]/g, "_");
@@ -322,21 +322,27 @@
       output.push(`Date\t${formattedDate}`);
       output.push("Event\tARC 1st Sealed Training");
       output.push("Format\tSealed Deck");
+      fabraryOutput.push("&format=sealed");
       output.push("Hero / Class\tDash (Mechanologist)");
+      fabraryOutput.push("ARC002");
       output.push("Result\t1st\n");
       output.push("\nArena cards\n1x Teklo Plasma Pistol\n1x Death Dealer\n1x Nebula Blade\n1x Crucible of Aetherweave\n");
-
+      fabraryOutput.push("ARC003","ARC040","ARC077","ARC115");
+      
       output.push("Equipment:");
       for (const [card, qty] of Object.entries(countCards(equipment))) {
         output.push(`${qty}x ${card}`);
+        fabraryOutput.push(...Array(qty).fill(cleanCardName(card)));
       }
 
       output.push("\nDeck cards:");
       for (const [card, qty] of Object.entries(countCards(deck))) {
         output.push(`${qty}x ${card}`);
+        fabraryOutput.push(...Array(qty).fill(cleanCardName(card)));
       }
 
       document.getElementById("output").textContent = output.join("\n");
+      document.getElementById("fabraryLink").href = "https://fabrary.net/decks?tab=import".concat(fabraryOutput.join("&cards="));
     }
 
     function copyToClipboard() {
