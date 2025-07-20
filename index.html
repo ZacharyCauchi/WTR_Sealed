@@ -214,7 +214,7 @@
               return acc;
             }, {});
     
-         const output = [];
+          const output = [];
           const fabraryOutput = [];
           const now = new Date();
           const formattedDate = now.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
@@ -244,8 +244,8 @@
     
           document.getElementById("output").textContent = output.join("\n");
           document.getElementById("fabraryLink").href = "https://fabrary.net/decks?tab=import".concat(fabraryOutput.join("&cards="));
-            }
-          });
+        }
+      });
     }
 
     //-----------------------------------------
@@ -328,7 +328,7 @@
               return acc;
             }, {});
     
-         const output = [];
+          const output = [];
           const fabraryOutput = [];
           const now = new Date();
           const formattedDate = now.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
@@ -360,6 +360,7 @@
           document.getElementById("output").textContent = output.join("\n");
           document.getElementById("fabraryLink").href = "https://fabrary.net/decks?tab=import".concat(fabraryOutput.join("&cards="));
         }
+      });
     }
 
     function copyToClipboard() {
