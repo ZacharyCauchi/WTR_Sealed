@@ -34,13 +34,6 @@
   <pre id="output"></pre>
 
   <script>
-    fetch('https://ipinfo.io/json?token=YOUR_TOKEN')
-    .then(response => response.json())
-    .then(data => {
-      if (data.country !== 'NZ') { // Change 'NZ' to your allowed country code
-        console.log('hello'); // Or display a blocked message
-      }
-    });
     function sample(array, count) {
       const copy = [...array];
       const result = [];
@@ -139,6 +132,17 @@
     }
       
     function generateDeckWTR(drone) {
+      fetch('https://ipinfo.io/json')
+      .then(response => response.json())
+      .then(data => {
+        if (data.country !== 'NZ') { // Change 'NZ' to your allowed country code
+          console.log('hello'); // Or display a blocked message
+        } else {
+          //do nothing
+          console.log('hello non kiwi');
+          return false;
+        }
+      });
       let deck = [];
       let equipment = [];
 
